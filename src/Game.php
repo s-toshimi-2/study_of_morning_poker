@@ -141,6 +141,33 @@ class Game
     }
 
     /**
+     * 役   : スリーカード
+     * 条件 : 同位札が3枚揃ったもの
+     *
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isThreeCard($cards)
+    {
+        for($i = 0; $i < 3; $i++) {
+            $result = true;
+            $tmpCards = array_slice($cards, $i, 3);
+
+            for ($j = 0; $j < 2; $j++) {
+                if (!$this->isPair($tmpCards[$j], $tmpCards[$j+1])) {
+                    $result = false;
+                    break;
+                }
+            }
+
+            if ($result) break;
+        }
+
+        return $result;
+    }
+
+    /**
      * ペアかどうか調べる
      *
      * @param array $cardA
