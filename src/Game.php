@@ -104,6 +104,21 @@ class Game
     }
 
     /**
+     * 役   : ロイヤルストレート・フラッシュ
+     * 条件 : 同種札かつ10->11(J)->12(Q)->13(K)->1(A)
+     *
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isRoyalStraightFlush($cards)
+    {
+        $list = $this->getNumberList($cards);
+        return $list === [1, 10, 11, 12, 13] && $this->isFlush($cards);
+    }
+
+
+    /**
      * 役   : ストレート・フラッシュ
      * 条件 : ストレートかつフラッシュ
      *
