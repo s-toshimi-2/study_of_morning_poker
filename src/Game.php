@@ -104,6 +104,19 @@ class Game
     }
 
     /**
+     * 役   : ストレート・フラッシュ
+     * 条件 : ストレートかつフラッシュ
+     *
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isStraightFlush($cards)
+    {
+        return $this->isStraight($cards) && $this->isFlush($cards);
+    }
+
+    /**
      * 役   : フォア・カード
      * 条件 : 同位札が4枚揃ったもの
      *
