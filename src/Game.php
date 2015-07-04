@@ -161,18 +161,14 @@ class Game
      */
     private function isThreeCard($cards)
     {
+        $result = false;
         for($i = 0; $i < 3; $i++) {
-            $result = true;
             $tmpCards = array_slice($cards, $i, 3);
 
-            for ($j = 0; $j < 2; $j++) {
-                if (!$this->isPair($tmpCards[$j], $tmpCards[$j+1])) {
-                    $result = false;
-                    break;
-                }
+            if ($this->countPair($cards) == 2) {
+                $result = true;
+                break;
             }
-
-            if ($result) break;
         }
 
         return $result;
