@@ -214,7 +214,8 @@ class Game
     private function countPair($cards)
     {
         $count = 0;
-        for($i = 0; $i < 4; $i++) {
+        $length = count($cards)-1;
+        for($i = 0; $i < $length; $i++) {
             if ($this->isPair($cards[$i], $cards[$i+1])) $count++;
         }
 
