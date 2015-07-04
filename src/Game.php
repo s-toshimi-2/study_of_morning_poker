@@ -148,21 +148,7 @@ class Game
      */
     private function isFourCard($cards)
     {
-        for($i = 0; $i < 2; $i++) {
-            $result = true;
-            $tmpCards = array_slice($cards, $i, 4);
-
-            for ($j = 0; $j < 3; $j++) {
-                if (!$this->isPair($tmpCards[$j], $tmpCards[$j+1])) {
-                    $result = false;
-                    break;
-                }
-            }
-
-            if ($result) break;
-        }
-
-        return $result;
+        return $this->countPair($cards) === 3;
     }
 
     /**
