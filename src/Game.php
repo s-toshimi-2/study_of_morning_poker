@@ -179,6 +179,19 @@ class Game
     }
 
     /**
+     * 役   : ワン・ペア
+     * 条件 : 同位札が2枚揃ったもの
+     *
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isOnePair($cards)
+    {
+        return $this->countPair($cards) === 1;
+    }
+
+    /**
      * ペアの数を数える
      *
      * @param array $cards
