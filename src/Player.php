@@ -56,7 +56,7 @@ class Player
     public function show()
     {
         foreach ($this->_cards as $k => $v) {
-            printf("index : %d, type : %10s, number : %2d\n", $k, $v['type'], $v['number']);
+            printf("index : %d, mark : %10s, number : %2d\n", $k, $v['mark'], $v['number']);
         }
     }
 }

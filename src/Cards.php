@@ -8,7 +8,7 @@ namespace Poker;
 class Cards
 {
     private $_deck; // 山札
-    private $_types = ['clover', 'diamond', 'heart', 'spade']; // カードの絵柄
+    private $_marks = ['clover', 'diamond', 'heart', 'spade']; // カードの絵柄
 
     public function __construct()
     {
@@ -23,10 +23,10 @@ class Cards
         // 山札を空にする
         $this->_deck = [];
 
-        foreach ($this->_types as $type) {
+        foreach ($this->_marks as $mark) {
             for ($i = 1; $i <= 13; $i++) {
                 $this->_deck[] = [
-                    'type'   => $type,
+                    'mark'   => $mark,
                     'number' => $i
                 ];
             }
