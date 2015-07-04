@@ -165,7 +165,7 @@ class Game
         for($i = 0; $i < 3; $i++) {
             $tmpCards = array_slice($cards, $i, 3);
 
-            if ($this->countPair($cards) == 2) {
+            if ($this->countPair($tmpCards) == 2) {
                 $result = true;
                 break;
             }
