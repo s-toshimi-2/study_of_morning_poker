@@ -87,6 +87,31 @@ class Game
     }
 
     /**
+     * 役   : フルハウス
+     * 条件 : 同位札が3枚と, 同位札が2枚
+     *
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isFullHouse($cards)
+    {
+        $result = false;
+        foreach([[0, 3], [2, 0]] as $i) {
+            $threeCards = array_slice($cards, $i[0], 3);
+            $twoCards = array_slice($cards, $i[1], 2);
+
+            $isThreeCard = $this->isPair($threeCards[0], $threeCards[1]) && $this->isPair($threeCards[0], $threeCards[2]);
+            if ($isThreeCard && $this->isPair($twoCards[0], $twoCards[1])) {
+                $result = true;
+                break;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * 役   : フラッシュ
      * 条件 : 同種札が5枚揃う
      *
