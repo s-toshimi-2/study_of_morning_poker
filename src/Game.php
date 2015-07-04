@@ -69,4 +69,31 @@ class Game
             $player->show();
         }
     }
+
+    /**
+     * 役   : フラッシュ
+     * 条件 : 同種札が5枚揃う
+     *
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isFlush($cards)
+    {
+        $mark = null;
+        $result = true;
+        foreach ($cards as $card) {
+            if (is_null($mark)) {
+                $mark = $card['mark'];
+                continue;
+            }
+
+            if ($card['mark'] !== $mark) {
+                $result = false;
+                break;
+            }
+        }
+
+        return $result;
+    }
 }
