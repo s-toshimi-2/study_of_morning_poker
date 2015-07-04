@@ -33,13 +33,30 @@ class Player
     }
 
     /**
-     * カードを捨てる
+     * 指定カードを捨てる
      *
-     * @param array 捨てるカード
+     * @param array $indexes 捨てるカードの番号
+     *
+     * @return array 捨てるカード
      */
-    public function discard()
+    public function discard($indexes)
     {
-        // TODO: とりあえず2枚捨てるようにしておく
-        return array_splice($this->_cards, 0, 2);
+        $cards = [];
+
+        foreach ($indexes as $index) {
+            $cards = array_merge($cards, array_splice($this->_cards, $index, 1));
+        }
+
+        return $cards;
+    }
+
+    /**
+     * 手札を表示
+     */
+    public function show()
+    {
+        foreach ($this->_cards as $k => $v) {
+            printf("index : %d, type : %10s, number : %2d\n", $k, $v['type'], $v['number']);
+        }
     }
 }
