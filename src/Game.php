@@ -87,6 +87,20 @@ class Game
     }
 
     /**
+     * 役   : フォア・カード
+     * 条件 : 同位札が4枚揃ったもの
+     *
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isFourCard($cards)
+    {
+        return $this->countPair($cards) === 3;
+    }
+
+
+    /**
      * 役   : フルハウス
      * 条件 : 同位札が3枚と, 同位札が2枚
      *
@@ -135,19 +149,6 @@ class Game
         }
 
         return $result;
-    }
-
-    /**
-     * 役   : フォア・カード
-     * 条件 : 同位札が4枚揃ったもの
-     *
-     * @param array $cards
-     *
-     * @return bool
-     */
-    private function isFourCard($cards)
-    {
-        return $this->countPair($cards) === 3;
     }
 
     /**
