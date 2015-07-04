@@ -71,6 +71,22 @@ class Game
     }
 
     /**
+     * 数値順に手札をソート
+     *
+     * @param array $cards 手札
+     *
+     * @return array
+     */
+    public function sortNumber($cards)
+    {
+        usort($cards, function($a, $b) {
+            return $a['number'] > $b['number'];
+        });
+
+        return $cards;
+    }
+
+    /**
      * 役   : フラッシュ
      * 条件 : 同種札が5枚揃う
      *
@@ -95,5 +111,45 @@ class Game
         }
 
         return $result;
+    }
+
+    /**
+     * 役   : フォア・カード
+     * 条件 : 同位札が4枚揃ったもの
+     *
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isFourCard($cards)
+    {
+        for($i = 0; $i < 2; $i++) {
+            $result = true;
+            $tmpCards = array_slice($cards, $i, 4);
+
+            for ($j = 0; $j < 3; $j++) {
+                if (!$this->isPair($tmpCards[$j], $tmpCards[$j+1])) {
+                    $result = false;
+                    break;
+                }
+            }
+
+            if ($result) break;
+        }
+
+        return $result;
+    }
+
+    /**
+     * ペアかどうか調べる
+     *
+     * @param array $cardA
+     * @param array $cardB
+     *
+     * @return bool
+     */
+    private function isPair($cardA, $cardB)
+    {
+        return $cardA['number'] === $cardB['number'];
     }
 }
