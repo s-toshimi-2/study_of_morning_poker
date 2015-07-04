@@ -193,6 +193,24 @@ class Game
     }
 
     /**
+     * ペアの数を数える
+     *
+     * @param array $cards
+     *
+     * @return int
+     */
+    private function countPair($cards)
+    {
+        $count = 0;
+        for($i = 0; $i < 4; $i++) {
+            if ($this->isPair($cards[$i], $cards[$i+1])) $count++;
+        }
+
+        return $count;
+    }
+
+
+    /**
      * ペアかどうか調べる
      *
      * @param array $cardA
