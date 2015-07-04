@@ -101,8 +101,7 @@ class Game
             $threeCards = array_slice($cards, $i[0], 3);
             $twoCards = array_slice($cards, $i[1], 2);
 
-            $isThreeCard = $this->isPair($threeCards[0], $threeCards[1]) && $this->isPair($threeCards[0], $threeCards[2]);
-            if ($isThreeCard && $this->isPair($twoCards[0], $twoCards[1])) {
+            if ($this->countPair($threeCards) === 2 && $this->countPair($twoCards) === 1) {
                 $result = true;
                 break;
             }
