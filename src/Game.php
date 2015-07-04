@@ -87,6 +87,23 @@ class Game
     }
 
     /**
+     * 手札の数字のみを返す
+     *
+     * @param array $cards
+     *
+     * @return array
+     */
+    private function getNumberList($cards)
+    {
+        $list = [];
+        foreach ($cards as $card) {
+            $list[] = $card['number'];
+        }
+
+        return $list;
+    }
+
+    /**
      * 役   : フォア・カード
      * 条件 : 同位札が4枚揃ったもの
      *
@@ -98,7 +115,6 @@ class Game
     {
         return $this->countPair($cards) === 3;
     }
-
 
     /**
      * 役   : フルハウス
@@ -143,6 +159,36 @@ class Game
             }
 
             if ($card['mark'] !== $mark) {
+                $result = false;
+                break;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * 役   : ストレート
+     * 条件 : 同位札が4枚揃ったもの
+     *        これはOK, 1(A) -> 2 -> 3 -> 4 -> 5, 10 -> 11(J) -> 12(Q) -> 13(K) -> 1(A)
+     *        これはNG,  11(J) -> 12(Q) -> 13(K) -> 1(A) -> 2
+     *
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isStraight($cards)
+    {
+        $list = $this->getNumberList($cards);
+
+        // 最初が1(A)の場合
+        if ($list[0] === 1 && $list === [1, 10, 11, 12, 13]) {
+            return true;
+        }
+
+        $result = true;
+        for ($i = 0; $i < 4; $i++) {
+            if ( ($list[$i+1] - $list[$i]) !== 1) {
                 $result = false;
                 break;
             }
@@ -217,7 +263,6 @@ class Game
 
         return $count;
     }
-
 
     /**
      * ペアかどうか調べる
