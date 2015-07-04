@@ -31,4 +31,15 @@ class Player
     {
         $this->_cards = array_merge($this->_cards, $cards);
     }
+
+    /**
+     * カードを捨てる
+     *
+     * @param array 捨てるカード
+     */
+    public function discard()
+    {
+        // TODO: とりあえず2枚捨てるようにしておく
+        return array_splice($this->_cards, 0, 2);
+    }
 }

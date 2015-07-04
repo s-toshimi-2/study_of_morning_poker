@@ -34,4 +34,20 @@ class Game
             $player->draw($cards);
         }
     }
+
+    /**
+     * ゲーム開始
+     */
+    public function play()
+    {
+        foreach ($this->_players as $player) {
+            // カードを捨てる
+            $cards = $player->discard();
+            $dealCardNum = count($cards);
+
+            // カードを捨てた枚数分を手札に加える
+            $cards = $this->_cards->deal($dealCardNum);
+            $player->draw($cards);
+        }
+    }
 }
