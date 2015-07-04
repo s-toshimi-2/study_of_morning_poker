@@ -104,6 +104,23 @@ class Game
     }
 
     /**
+     * 手札の絵柄のみを返す
+     *
+     * @param array $cards
+     *
+     * @return array
+     */
+    private function getMarkList($cards)
+    {
+        $list = [];
+        foreach ($cards as $card) {
+            $list[] = $card['mark'];
+        }
+
+        return $list;
+    }
+
+    /**
      * 役   : ロイヤルストレート・フラッシュ
      * 条件 : 同種札かつ10->11(J)->12(Q)->13(K)->1(A)
      *
@@ -178,21 +195,8 @@ class Game
      */
     private function isFlush($cards)
     {
-        $mark = null;
-        $result = true;
-        foreach ($cards as $card) {
-            if (is_null($mark)) {
-                $mark = $card['mark'];
-                continue;
-            }
-
-            if ($card['mark'] !== $mark) {
-                $result = false;
-                break;
-            }
-        }
-
-        return $result;
+        $list = $this->getMarkList($cards);
+        return count(array_unique($list)) === 1;
     }
 
     /**
