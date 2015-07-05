@@ -131,6 +131,19 @@ class Game
     }
 
     /**
+     * 最終結果
+     */
+    public function result()
+    {
+        printf("-----------------------------------\n");
+        printf("               Result              \n");
+        printf("-----------------------------------\n");
+        foreach ($this->_result as $k => $v) {
+            printf("player%d is %s\n", $k, $v);
+        }
+    }
+
+    /**
      * 数値順に手札をソート
      *
      * @param array $cards 手札
