@@ -42,21 +42,29 @@ class Game
     public function play()
     {
         foreach ($this->_players as  $k => $player) {
-            // プレイヤーが捨てるカードを決める
-            printf("player%sの番です. 捨てるカードの番号を入力してください. (捨てない場合はEnterを押してください)?\n", $k);
-            printf("入力例) 1 2 4\n", $k);
-            $player->show();
-            $line = trim(fgets(STDIN));
+            $indexes = null;
+            while (1) {
+                // プレイヤーが捨てるカードを決める
+                printf("player%sの番です. 捨てるカードの番号を入力してください. (捨てない場合はEnterを押してください)?\n", $k);
+                printf("入力例) 1 2 4\n", $k);
+                $player->show();
+                $line = trim(fgets(STDIN));
 
-            // 捨てるカードの番号取得
-            $indexes = explode(' ', $line);
-            $indexes = array_unique($indexes);
+                // 捨てるカードの番号取得
+                $indexes = explode(' ', $line);
+                $indexes = array_unique($indexes);
 
-            // 不要な要素を削除
-            $deleteIndex = array_search('', $indexes);
-            if ($deleteIndex !== false) {
-                array_splice($indexes, $deleteIndex, 1);
+                // 不要な要素を削除
+                $deleteIndex = array_search('', $indexes);
+                if ($deleteIndex !== false) {
+                    array_splice($indexes, $deleteIndex, 1);
+                }
+
+                if ($this->checkDiscardCard($indexes)) break;
+
+                echo "エラー : カード番号は0 ~ 4以外を入力しないでください\n";
             }
+
             arsort($indexes);
 
             // カードを捨てる
@@ -70,6 +78,26 @@ class Game
             // 手札表示
             $player->show();
         }
+    }
+
+    /**
+     * 捨てるカード番号が正しいか確認
+     *
+     * @param array $indexes
+     *
+     * @return bool 
+     */
+    private function checkDiscardCard($indexes)
+    {
+        $result = true;
+        foreach ($indexes as $index) {
+            if (!in_array($index, ['0', '1' , '2', '3', '4'], true)) {
+                $result = false;
+                break;
+            }
+        }
+
+        return $result;
     }
 
     /**
