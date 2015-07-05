@@ -364,7 +364,8 @@ class Game
      */
     private function isTwoPair($cards)
     {
-        return $this->countPair($cards) === 2;
+        // countPairは組み合わせなのでスリーカードとツー・ペアは同じ値になるので念のためスリーカードでないかチェックする
+        return !$this->isThreeCard($cards) && $this->countPair($cards) === 2;
     }
 
     /**
@@ -381,7 +382,8 @@ class Game
     }
 
     /**
-     * ペアの数を数える
+     * ペアの数を数える(ペアというよりは組み合わせを数えている)
+     * 1,1,1,2,3であれば, (1,1), (1,1)というペアになるので2となる
      *
      * @param array $cards
      *
