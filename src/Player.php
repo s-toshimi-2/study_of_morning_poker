@@ -59,4 +59,14 @@ class Player
             printf("index : %d, mark : %10s, number : %2d\n", $k, $v['mark'], $v['number']);
         }
     }
+
+    /**
+     * 手札を返す
+     *
+     * @return array
+     */
+    public function getCards()
+    {
+        return $this->_cards;
+    }
 }

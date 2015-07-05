@@ -9,6 +9,7 @@ class Game
 {
     private $_cards;
     private $_players;
+    private $_result;
 
     public function __construct($countPlayers)
     {
@@ -67,6 +68,65 @@ class Game
 
             // 手札表示
             $player->show();
+        }
+    }
+
+    /**
+     * 役確認
+     */
+    public function check()
+    {
+        $this->_result = [];
+        foreach ($this->_players as $player) {
+            $cards = $player->getCards();
+            $cards = $this->sortNumber($cards);
+
+            if ($this->isRoyalStraightFlush($cards)) {
+                $this->_result[] = 'RoyalStraightFlush';
+                continue;
+            }
+
+            if ($this->isStraightFlush($cards)) {
+                $this->_result[] = 'StraightFlush';
+                continue;
+            }
+
+            if ($this->isFourCard($cards)) {
+                $this->_result[] = 'FourCard';
+                continue;
+            }
+
+            if ($this->isFullHouse($cards)) {
+                $this->_result[] = 'FullHouse';
+                continue;
+            }
+
+            if ($this->isFlush($cards)) {
+                $this->_result[] = 'Flush';
+                continue;
+            }
+
+            if ($this->isStraight($cards)) {
+                $this->_result[] = 'Straight';
+                continue;
+            }
+
+            if ($this->isThreeCard($cards)) {
+                $this->_result[] = 'ThreeCard';
+                continue;
+            }
+
+            if ($this->isTwoPair($cards)) {
+                $this->_result[] = 'TwoPair';
+                continue;
+            }
+
+            if ($this->isOnePair($cards)) {
+                $this->_result[] = 'OnePair';
+                continue;
+            }
+
+            $this->_result[] = 'No Hand';
         }
     }
 
