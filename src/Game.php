@@ -41,9 +41,10 @@ class Game
      */
     public function play()
     {
-        foreach ($this->_players as $player) {
+        foreach ($this->_players as  $k => $player) {
             // プレイヤーが捨てるカードを決める
-            printf("どの手札を捨てますか?\n");
+            printf("player%sの番です. 捨てるカードの番号を入力してください. (捨てない場合はEnterを押してください)?\n", $k);
+            printf("入力例) 1 2 4\n", $k);
             $player->show();
             $line = trim(fgets(STDIN));
 
@@ -82,51 +83,51 @@ class Game
             $cards = $this->sortNumber($cards);
 
             if ($this->isRoyalStraightFlush($cards)) {
-                $this->_result[] = 'RoyalStraightFlush';
+                $this->_result[] = 'ロイヤルストレート・フラッシュ';
                 continue;
             }
 
             if ($this->isStraightFlush($cards)) {
-                $this->_result[] = 'StraightFlush';
+                $this->_result[] = 'ストレート・フラッシュ';
                 continue;
             }
 
             if ($this->isFourCard($cards)) {
-                $this->_result[] = 'FourCard';
+                $this->_result[] = 'フォア・カード';
                 continue;
             }
 
             if ($this->isFullHouse($cards)) {
-                $this->_result[] = 'FullHouse';
+                $this->_result[] = 'フルハウス';
                 continue;
             }
 
             if ($this->isFlush($cards)) {
-                $this->_result[] = 'Flush';
+                $this->_result[] = 'フラッシュ';
                 continue;
             }
 
             if ($this->isStraight($cards)) {
-                $this->_result[] = 'Straight';
+                $this->_result[] = 'ストレート';
                 continue;
             }
 
             if ($this->isThreeCard($cards)) {
-                $this->_result[] = 'ThreeCard';
+                $this->_result[] = 'スリーカード';
                 continue;
             }
 
             if ($this->isTwoPair($cards)) {
-                $this->_result[] = 'TwoPair';
+                $this->_result[] = 'ツー・ペア';
                 continue;
             }
 
             if ($this->isOnePair($cards)) {
-                $this->_result[] = 'OnePair';
+                $this->_result[] = 'ワン・ペア';
                 continue;
             }
 
-            $this->_result[] = 'No Hand';
+            $this->_result[] = '役なし';
         }
     }
 
@@ -136,10 +137,10 @@ class Game
     public function result()
     {
         printf("-----------------------------------\n");
-        printf("               Result              \n");
+        printf("             結果発表              \n");
         printf("-----------------------------------\n");
         foreach ($this->_result as $k => $v) {
-            printf("player%d is %s\n", $k, $v);
+            printf("player%d : %s\n", $k, $v);
         }
     }
 
@@ -274,7 +275,7 @@ class Game
 
     /**
      * 役   : ストレート
-     * 条件 : 同位札が4枚揃ったもの
+     * 条件 : 5枚のカードの数字が続いている
      *        これはOK, 1(A) -> 2 -> 3 -> 4 -> 5, 10 -> 11(J) -> 12(Q) -> 13(K) -> 1(A)
      *        これはNG,  11(J) -> 12(Q) -> 13(K) -> 1(A) -> 2
      *

@@ -8,7 +8,7 @@ namespace Poker;
 class Cards
 {
     private $_deck; // 山札
-    private $_marks = ['clover', 'diamond', 'heart', 'spade']; // カードの絵柄
+    private $_marks = ['クローバー', 'ダイヤ', 'ハート', 'スペード']; // カードの絵柄
 
     public function __construct()
     {

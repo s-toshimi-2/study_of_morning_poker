@@ -7,7 +7,7 @@ namespace Poker;
  */
 class Player
 {
-    private $_cards; // 手札
+    private $_cards;    // 手札
 
     public function __construct()
     {
@@ -56,7 +56,7 @@ class Player
     public function show()
     {
         foreach ($this->_cards as $k => $v) {
-            printf("index : %d, mark : %10s, number : %2d\n", $k, $v['mark'], $v['number']);
+            printf("番号 : %d, 数字 : %2d, 絵柄 : %s, \n", $k, $v['number'], $v['mark']);
         }
     }
 
