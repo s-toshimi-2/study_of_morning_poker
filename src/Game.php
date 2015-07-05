@@ -41,7 +41,7 @@ class Game
      */
     public function play()
     {
-        foreach ($this->_players as  $k => $player) {
+        foreach ($this->_players as $k => $player) {
             $indexes = null;
             while (1) {
                 // プレイヤーが捨てるカードを決める
@@ -91,7 +91,7 @@ class Game
     {
         $result = true;
         foreach ($indexes as $index) {
-            if (!in_array($index, ['0', '1' , '2', '3', '4'], true)) {
+            if (!in_array($index, ['0', '1', '2', '3', '4'], true)) {
                 $result = false;
                 break;
             }
